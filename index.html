@@ -3,30 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าหลัก | เว็บไซต์ส่วนตัว</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="เว็บไซต์พอร์ตโฟลิโอส่วนตัว">
+    <title>ยินดีต้อนรับสู่เว็บไซต์ของฉัน | Home</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <nav>
+        <div class="logo">My Portfolio</div>
+        <nav aria-label="Main Navigation">
             <ul class="nav-links">
-                <li><a href="index.html">หน้าแรก</a></li>
-                <li><a href="cv.html">ประวัติส่วนตัว</a></li>
-                <li><a href="project.html">โปรเจกต์ JS</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">CV</a></li>
+                <li><a href="countdown.html">Graduation</a></li>
+                <li><a href="pets.html">Pets</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="container">
+    <main>
         <section class="hero">
-            <h1>ยินดีต้อนรับสู่เว็บไซต์ของฉัน</h1>
-            <p>นี่คือโปรเจกต์เว็บไซต์ส่วนตัวที่สร้างขึ้นเพื่อส่งงานวิชา Web Development</p>
-            <p>เน้นการใช้งาน <strong>Semantic HTML</strong> และ <strong>Responsive Design</strong></p>
+            <div class="hero-content">
+                <h1>สวัสดี! ยินดีที่ได้รู้จัก 🌟</h1>
+                <p>ยินดีต้อนรับสู่พื้นที่เล็กๆ บนโลกออนไลน์ของฉัน ที่รวบรวมผลงานและความสนใจไว้ในที่เดียว</p>
+                <a href="about.html" class="btn-cta">ทำความรู้จักกันเพิ่ม</a>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Jirasin Worasiri. All rights reserved.</p>
+        <p>&copy; 2024 My Personal Website. All Rights Reserved.</p>
+        <p style="font-size: 0.8rem;">ข้อมูลและรูปภาพทั้งหมดใช้เพื่อประกอบการศึกษาเท่านั้น</p>
     </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
