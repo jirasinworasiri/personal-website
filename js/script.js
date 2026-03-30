@@ -1,34 +1,41 @@
-/**
- * ฟังก์ชันคำนวณเวลาถอยหลัง (Countdown Timer)
- * อ้างอิงหลักการ Progressive Enhancement: 
- * หาก JS ไม่ทำงาน ผู้ใช้จะเห็นข้อความพื้นฐานใน HTML
- */
-function updateCountdown() {
-    const graduationDate = new Date("March 31, 2027 09:00:00").getTime();
-    const now = new Date().getTime();
-    const distance = graduationDate - now;
-
-    // คำนวณวัน ชั่วโมง นาที และวินาที
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // แสดงผลลงใน element ที่มี id "countdown-timer"
-    const display = document.getElementById("countdown-timer");
-    if (display) {
-        display.innerHTML = `${days} วัน ${hours} ชม. ${minutes} นาที ${seconds} วิ`;
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Countdown Logic ---
+    if (document.getElementById('days')) {
+        const target = new Date("March 31, 2027 00:00:00").getTime();
+        const update = () => {
+            const now = new Date().getTime();
+            const diff = target - now;
+            if (diff > 0) {
+                document.getElementById('days').innerText = Math.floor(diff / 86400000);
+                document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
+                document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
+                document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
+            }
+        };
+        setInterval(update, 1000); update();
     }
 
-    // หากถึงวันเรียนจบแล้ว
-    if (distance < 0) {
-        clearInterval(timerInterval);
-        display.innerHTML = "ยินดีด้วย! คุณเรียนจบแล้ว 🎉";
+    // --- Game Logic ---
+    if (document.getElementById('btnGuess')) {
+        let secret = Math.floor(Math.random() * 100) + 1;
+        let count = 0;
+        const input = document.getElementById('guessInput'), btn = document.getElementById('btnGuess');
+        const fb = document.getElementById('feedback'), log = document.getElementById('logList');
+
+        btn.addEventListener('click', () => {
+            const val = parseInt(input.value);
+            if (isNaN(val) || val < 1 || val > 100) { fb.innerText = "ใส่เลข 1-100 ดิ๊!"; return; }
+            count++;
+            if (val === secret) {
+                fb.innerText = `ถูก! เลขคือ ${secret} (${count} ครั้ง)`;
+                fb.style.color = "#00ff88"; btn.disabled = true;
+            } else {
+                fb.innerText = val > secret ? "มากไป!" : "น้อยไป!";
+                fb.style.color = "#ffcc00";
+            }
+            const li = document.createElement('li'); li.innerText = `ครั้งที่ ${count}: ${val}`;
+            log.prepend(li); input.value = ""; input.focus();
+        });
+        document.getElementById('btnReset').addEventListener('click', () => location.reload());
     }
-}
-
-// อัปเดตทุกๆ 1 วินาที
-const timerInterval = setInterval(updateCountdown, 1000);
-
-// เรียกใช้งานครั้งแรกทันทีไม่ต้องรอ 1 วินาที
-updateCountdown();
+});

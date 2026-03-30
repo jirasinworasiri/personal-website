@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game | Guess Number</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">GRAD<span>2027</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cv.html">Profile</a></li>
+            <li><a href="cats.html">My Cats</a></li>
+            <li><a href="game.html" class="active">Game</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <div class="game-box card animate-pop">
+            <h2>🔒 THE VAULT</h2>
+            <p>กูสุ่มเลข 1-100 ไว้ ลองทายดู!</p>
+            <div class="input-group">
+                <input type="number" id="guessInput" min="1" max="100">
+                <button id="btnGuess" class="btn-cyber">ทายเลข</button>
+            </div>
+            <p id="feedback">สถานะ: รอการทาย...</p>
+            <div class="log-panel">
+                <ul id="logList"></ul>
+            </div>
+            <button id="btnReset" class="btn-reset">เริ่มใหม่</button>
+        </div>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -3,42 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="เว็บไซต์พอร์ตโฟลิโอส่วนตัว">
-    <title>ยินดีต้อนรับสู่เว็บไซต์ของฉัน | Home</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <title>Graduation 2027 | Home</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <div class="logo">My Portfolio</div>
-        <nav aria-label="Main Navigation">
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">CV</a></li>
-                <li><a href="countdown.html">Graduation</a></li>
-                <li><a href="pets.html">Pets</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>สวัสดี! ยินดีที่ได้รู้จัก 🌟</h1>
-                <p>ยินดีต้อนรับสู่พื้นที่เล็กๆ บนโลกออนไลน์ของฉัน ที่รวบรวมผลงานและความสนใจไว้ในที่เดียว</p>
-                <a href="about.html" class="btn-cta">ทำความรู้จักกันเพิ่ม</a>
+    <nav class="navbar">
+        <div class="logo">GRAD<span>2027</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="cv.html">Profile</a></li>
+            <li><a href="cats.html">My Cats</a></li>
+            <li><a href="game.html">Game</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero-section">
+
+        <!-- 🔲 กล่องใหญ่ครอบ -->
+        <div class="main-box animate-pop">
+
+            <h1 class="main-title">
+                COUNTDOWN TO <span>GRADUATION</span>
+            </h1>
+
+            <p class="target-date">31 MARCH 2027</p>
+
+            <div id="countdown" class="countdown-grid">
+
+                <div class="time-box card">
+                    <span id="days">00</span>
+                    <p>Days</p>
+                </div>
+
+                <div class="time-box card">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
+                </div>
+
+                <div class="time-box card">
+                    <span id="minutes">00</span>
+                    <p>Mins</p>
+                </div>
+
+                <div class="time-box card">
+                    <span id="seconds">00</span>
+                    <p>Secs</p>
+                </div>
+
             </div>
-        </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2024 My Personal Website. All Rights Reserved.</p>
-        <p style="font-size: 0.8rem;">ข้อมูลและรูปภาพทั้งหมดใช้เพื่อประกอบการศึกษาเท่านั้น</p>
-    </footer>
+            <a href="cv.html" class="btn-cyber">View My Profile</a>
+
+        </div>
+
+    </header>
 
     <script src="js/script.js"></script>
 </body>

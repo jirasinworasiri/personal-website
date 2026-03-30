@@ -1,213 +1,299 @@
-/* ================================================================
-   1. VARIABLES & RESET
-   การใช้ CSS Variables ช่วยให้แก้ไขธีมสีได้ง่าย (Best Practice)
-   ================================================================
-*/
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
-
 :root {
-    /* โทนสี Vibrant Modern */
-    --primary-color: #6366f1;    /* Indigo */
-    --secondary-color: #ec4899;  /* Pink */
-    --accent-color: #f59e0b;     /* Amber */
-    --bg-light: #f8fafc;
-    --text-dark: #1e293b;
-    --text-light: #ffffff;
-    --glass-bg: rgba(255, 255, 255, 0.85);
-    
-    /* การตั้งค่า Animation */
-    --transition: all 0.3s ease;
+  --bg: #eaf6ff;
+  --card: rgba(255,255,255,0.75);
+  --accent: #3b82f6;
+  --accent-soft: #93c5fd;
+  --text: #1e293b;
 }
 
+/* RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Prompt', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
+/* ===== BODY + BACKGROUND ===== */
 body {
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    line-height: 1.6;
-    overflow-x: hidden; /* ป้องกันหน้าจอเลื่อนแนวนอน */
+  background: linear-gradient(to bottom, #dbeafe, #eff6ff);
+  color: var(--text);
+  line-height: 1.6;
+  animation: fadeIn 0.8s ease;
 }
 
-/* ================================================================
-   2. HEADER & NAVIGATION (Flexbox Design)
-   จัดการเมนูให้อยู่ขวาบนและมีความเป็น Glassmorphism
-   ================================================================
-*/
-header {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px); /* ทำให้พื้นหลังเบลอแบบกระจก */
-    padding: 1rem 8%;
-    display: flex;
-    justify-content: space-between; /* แยก Logo ซ้าย เมนูขวา */
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+/* เอฟเฟคพื้นหลังลอย */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(59,130,246,0.15), transparent 70%);
+  z-index: -1;
 }
 
-.logo {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    letter-spacing: 1px;
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 8%;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #cbd5f5;
+  box-shadow: 0 5px 20px rgba(59,130,246,0.15);
 }
 
 .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 30px;
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
 }
 
 .nav-links a {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 500;
-    font-size: 1rem;
-    transition: var(--transition);
-    position: relative;
+  text-decoration: none;
+  color: #64748b;
+  transition: 0.3s;
 }
 
-/* เอฟเฟกต์เส้นใต้เมื่อ Hover (UX/UI Detail) */
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: var(--secondary-color);
-    transition: var(--transition);
-}
-
+.nav-links a.active,
 .nav-links a:hover {
-    color: var(--secondary-color);
+  color: var(--accent);
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(59,130,246,0.5);
 }
 
-.nav-links a:hover::after {
-    width: 100%;
+.logo span {
+  color: var(--accent);
 }
 
-/* สถานะหน้าปัจจุบัน (Active State) */
-.nav-links a.active {
-    color: var(--primary-color);
-    font-weight: 600;
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-/* ================================================================
-   3. HERO SECTION
-   ใช้ Flexbox ในการจัดวางเนื้อหาให้อยู่กึ่งกลางหน้าจอ
-   ================================================================
-*/
-.hero {
-    min-height: 85vh;
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--text-light);
-    text-align: center;
-    padding: 2rem;
-}
-
-.hero h1 {
-    font-size: clamp(2rem, 5vw, 4rem); /* ปรับขนาดฟอนต์ตามขนาดหน้าจออัตโนมัติ */
-    margin-bottom: 1rem;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.hero p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    opacity: 0.9;
-}
-
-/* ปุ่ม CTA (Call to Action) ตกแต่งให้น่ากด */
-.btn-primary {
-    margin-top: 2rem;
-    padding: 12px 35px;
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
-    filter: brightness(1.1);
-}
-
-/* ================================================================
-   4. LAYOUT SYSTEM (CSS Grid)
-   ใช้สำหรับหน้า Pets และ CV เพื่อความยืดหยุ่น (Responsive without Queries)
-   ================================================================
-*/
-.grid-container {
-    display: grid;
-    /* repeat(auto-fit) ช่วยให้ Grid ปรับจำนวน Column ตามความกว้างหน้าจออัตโนมัติ */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    padding: 50px 8%;
-}
-
+/* ===== CARD (Glass Effect) ===== */
 .card {
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    transition: var(--transition);
-    border: 1px solid rgba(0,0,0,0.03);
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 10px 30px rgba(59,130,246,0.15);
+  transition: 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(59,130,246,0.25);
 }
 
-/* ================================================================
-   5. RESPONSIVE DESIGN (Media Queries)
-   ปรับแต่งให้ดูดีในสมาร์ทโฟน
-   ================================================================
-*/
+/* ===== HERO ===== */
+.hero-section {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.highlight {
+  color: var(--accent);
+}
+
+/* ===== BUTTON ===== */
+.btn-cyber {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(59,130,246,0.4);
+  transition: 0.3s;
+}
+
+.btn-cyber:hover {
+  transform: translateY(-3px);
+}
+
+/* แสงวิ่ง */
+.btn-cyber::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+  transition: 0.5s;
+}
+
+.btn-cyber:hover::after {
+  left: 100%;
+}
+
+/* ===== COUNTDOWN ===== */
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 2rem 0;
+}
+
+.time-box span {
+  font-size: 2.5rem;
+  color: var(--accent);
+  font-weight: bold;
+  display: block;
+  text-shadow: 0 0 10px rgba(59,130,246,0.6);
+}
+
+/* ===== CV ===== */
+.cv-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent);
+  margin-bottom: 1rem;
+  box-shadow: 0 5px 15px rgba(59,130,246,0.3);
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ===== SKILLS ===== */
+.skills-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skills-flex span {
+  background: #dbeafe;
+  color: var(--accent);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  transition: 0.3s;
+}
+
+.skills-flex span:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* ===== PETS ===== */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.img-frame {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.img-frame img:hover {
+  transform: scale(1.1);
+}
+
+/* ===== INPUT ===== */
+.input-group {
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+input {
+  background: white;
+  border: 1px solid #cbd5f5;
+  color: var(--text);
+  padding: 8px;
+  border-radius: 8px;
+  width: 80px;
+  text-align: center;
+}
+
+/* ===== LOG ===== */
+.log-panel {
+  background: #f1f5f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 1rem;
+  max-height: 120px;
+  overflow-y: auto;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+/* ===== RESET BUTTON ===== */
+.btn-reset {
+  margin-top: 1rem;
+  background: none;
+  border: 1px solid #94a3b8;
+  color: #64748b;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* ===== ANIMATION ===== */
+.animate-pop {
+  animation: pop 0.4s ease-out;
+}
+
+@keyframes pop {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ลอย */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* fade */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
-    header {
-        flex-direction: column; /* เปลี่ยนโลโก้กับเมนูให้วางเรียงแนวดิ่ง */
-        padding: 1.5rem;
-    }
-
-    .nav-links {
-        margin-top: 1.5rem;
-        gap: 15px;
-        flex-wrap: wrap; /* ป้องกันเมนูหลุดขอบหน้าจอ */
-        justify-content: center;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-}
-
-/* ================================================================
-   6. FOOTER
-   ================================================================
-*/
-footer {
-    text-align: center;
-    padding: 30px;
-    background: #f1f5f9;
-    color: #64748b;
-    font-size: 0.9rem;
+  .cv-grid,
+  .cat-grid,
+  .countdown-grid {
+    grid-template-columns: 1fr;
+  }
 }
